@@ -145,4 +145,5 @@ create table  doctors (
 create table speciality (
 	speciality varchar(50) primary key ,
 	clinic varchar(50) ,
+
 )
