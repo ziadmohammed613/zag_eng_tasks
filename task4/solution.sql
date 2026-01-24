@@ -21,3 +21,8 @@ group by format(trans_date, 'yyyy-MM') , country;
 select teacher_id , count(distinct subject_id) as cnt
 from Teacher
 group by teacher_id;
+-- problem 5
+select employee_id
+from Employees
+where salary < 30000 and manager_id not in (select employee_id from Employees)
+order by employee_id;
