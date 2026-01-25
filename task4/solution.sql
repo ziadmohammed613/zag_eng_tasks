@@ -33,3 +33,12 @@ select ( case when id = ( select count(*) from Seat )
 end ) as id , student
 from Seat
 order by id asc;
+-- problem 7
+select employee_id , department_id
+from Employee
+where primary_flag = 'Y' or employee_id in (
+    select employee_id
+    from Employee
+    group by employee_id
+    having count(*) = 1
+)
