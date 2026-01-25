@@ -26,3 +26,10 @@ select employee_id
 from Employees
 where salary < 30000 and manager_id not in (select employee_id from Employees)
 order by employee_id;
+-- problem 6
+select ( case when id = ( select count(*) from Seat ) 
+            and (select count(*) from Seat) % 2 = 1 then id else
+    ( case when id % 2 = 0 then id - 1 else id + 1 end )
+end ) as id , student
+from Seat
+order by id asc;
