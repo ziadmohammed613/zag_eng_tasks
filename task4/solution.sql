@@ -42,3 +42,11 @@ where primary_flag = 'Y' or employee_id in (
     group by employee_id
     having count(*) = 1
 )
+-- problem 10
+create view vw_vipCustomers as
+select customers.customer_id , [name] , email , SUM(total_amount) as total_spent
+from customers
+join orders
+on customers.customer_id = orders.customer_id
+group by customers.customer_id , [name] , email
+having total_spent > 5000;
