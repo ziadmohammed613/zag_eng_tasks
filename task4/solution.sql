@@ -48,6 +48,15 @@ create nonclustered index index_logs on AppLogs ([service_name] , created_at des
 
 -- ans: by reducing the selected columns , so the index covers only it's columns
 
+-- problem 9
+create procedure sp_ApplyCategoryDiscount (
+    @CatID int ,
+    @DiscountPercent decimal(10,2)
+)
+as
+update products
+set price = greatest(price * (1 - @DiscountPercent / 100.0), min_price)
+where category_id = @CatID
 -- problem 10
 create view vw_vipCustomers as
 select customers.customer_id , [name] , email , SUM(total_amount) as total_spent
