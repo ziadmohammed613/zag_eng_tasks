@@ -42,6 +42,12 @@ where primary_flag = 'Y' or employee_id in (
     group by employee_id
     having count(*) = 1
 )
+-- problem 7 index
+create nonclustered index index_logs on AppLogs ([service_name] , created_at desc);
+-- problem 8
+
+-- ans: by reducing the selected columns , so the index covers only it's columns
+
 -- problem 10
 create view vw_vipCustomers as
 select customers.customer_id , [name] , email , SUM(total_amount) as total_spent
