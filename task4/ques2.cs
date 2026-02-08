@@ -2,15 +2,15 @@ using System;
 
 namespace Question2 {
     class Version {
-        double versionNo { get; set; }
+        public double versionNo { get; set; }
         public Version(double versionNo) {
             this.versionNo = versionNo;
         }
     }
     class Feature {
-        private string name { set; get; }
+        public string name { set; get; }
         private bool isEnabled { set; get; }
-        private Version minimumVersion { set; get; }
+        public Version minimumVersion { set; get; }
         public Feature(string name ,bool isEnabled ,Version minimumVersion) {
             this.name = name;
             this.isEnabled = isEnabled;
