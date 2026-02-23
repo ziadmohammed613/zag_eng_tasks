@@ -99,6 +99,27 @@ namespace LinqTask
             bool anyCheaperThan200 = products.Any(p => p.Price < 200);
             System.Console.WriteLine(anyCheaperThan200);
         }
+        public static void Question4()
+        {
+            List<Product> products =
+            [
+            new(1, "Laptop", 1200m, "Electronics"),
+            new(2, "Phone", 800m, "Electronics"),
+            new(3, "Desk", 350m, "Furniture"),
+            new(4, "Chair", 150m, "Furniture"),
+            new(5, "Headphones", 200m, "Electronics"),
+            ];
+
+            System.Console.WriteLine("==================== point 1 ====================");
+            Product[] arr = products.ToArray();
+            PrintList(arr);
+            System.Console.WriteLine("==================== point 2 ====================");
+            Dictionary<int,Product> dict = products.ToDictionary(p => p.Id);
+            PrintList(dict);
+            System.Console.WriteLine("==================== point 3 ====================");
+            HashSet<Product> set = products.ToHashSet();
+            PrintList(set);
+        }
         public static void Main()
         {
 
