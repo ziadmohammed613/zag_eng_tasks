@@ -154,6 +154,28 @@ namespace LinqTask
                 PrintList(pages.ElementAt(i));
             }
         }
+        record Employee(string Name, string Department, decimal Salary);
+        public static void Question6()
+        {
+            List<Employee> employees =
+            [
+            new("Ali", "Engineering", 9000m),
+            new("Sara", "Engineering", 8500m),
+            new("Omar", "HR", 6000m),
+            new("Mona", "HR", 6200m),
+            new("Yara", "Marketing", 7000m),
+            new("Karim", "Marketing", 7500m),
+            new("Nada", "Engineering", 9500m),
+            ];
+            System.Console.WriteLine("1. Project to anonymous type: { FullName = Name.ToUpper(), Salary }");
+            PrintList(employees.Select(e => new { FullName = e.Name.ToUpper() , e.Salary } ));
+            System.Console.WriteLine("2. Project to a formatted string: \"Ali works in Engineering — EGP 9,000\"");
+            PrintList(employees.Select(e => $"{e.Name} works in {e.Department} — EGP {e.Salary:N0}"));
+            System.Console.WriteLine("3. Sort by Salary descending, then use indexed Select to add Rank");
+            PrintList(employees.OrderByDescending(e => e.Salary).ToList().Select((e , index)=> new { Rand = index + 1 , e.Name , e.Salary }));
+            System.Console.WriteLine("BONUS: Project each employee to include a \"SeniorityLevel\" property");
+            PrintList(employees.Select(e => new { e.Name , e.Department , e.Salary , Seniority = e.Salary >= 9000 ? "Senior" : e.Salary >= 7000 ? "Mid" : "Junior"}));
+        }
         public static void Main()
         {
             
