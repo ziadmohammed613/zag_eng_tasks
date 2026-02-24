@@ -104,6 +104,7 @@ namespace LinqTask
             List<Product> products =
             [
             new(1, "Laptop", 1200m, "Electronics"),
+            // new(1, "Laptop", 1200m, "Electronics"),
             new(2, "Phone", 800m, "Electronics"),
             new(3, "Desk", 350m, "Furniture"),
             new(4, "Chair", 150m, "Furniture"),
@@ -119,10 +120,19 @@ namespace LinqTask
             System.Console.WriteLine("==================== point 3 ====================");
             HashSet<Product> set = products.ToHashSet();
             PrintList(set);
+            // ArgumentException when keys are duplicated
+            System.Console.WriteLine("==================== point 4 ====================");
+            ILookup<string,Product> lookup = products.ToLookup(p => p.Category);
+            foreach(var group in lookup)
+            {
+                System.Console.WriteLine($"Category: {group.Key}");
+                PrintList(group);
+            }
+            // ToLookup groups all objects with the same key
         }
         public static void Main()
         {
-
+            
         }
     }
 }
