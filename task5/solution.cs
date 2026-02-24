@@ -130,9 +130,32 @@ namespace LinqTask
             }
             // ToLookup groups all objects with the same key
         }
+        public static void Question5()
+        {
+            List<string> orders = ["ORD-001", "ORD-002", "ORD-003","ORD-004", "ORD-005", "ORD-006", "ORD-007"];
+            System.Console.WriteLine("1. Get Page 1 (items 1–3)");
+            PrintList(orders.Take(3));
+            System.Console.WriteLine("2. Get Page 2 (items 4–6) ← use Skip + Take");
+            PrintList(orders.Skip(3).Take(3));
+            System.Console.WriteLine("3. Get the last 2 orders using TakeLast");
+            PrintList(orders.TakeLast(2));
+            System.Console.WriteLine("4. Drop the first and last order using Skip + SkipLast");
+            PrintList(orders.Skip(1).SkipLast(1));
+            System.Console.WriteLine("5. BONUS: Write a generic Paginate(source, pageNumber, pageSize) method");
+            Pagination(orders, 3);
+        }
+        public static void Pagination<T>(IEnumerable<T> items, int chunk)
+        {
+            IEnumerable<T[]> pages = items.Chunk(chunk);
+            for( int i = 0 ; i < pages.Count() ; i++ )
+            {
+                System.Console.WriteLine($"========= page number {i + 1} =========");
+                PrintList(pages.ElementAt(i));
+            }
+        }
         public static void Main()
         {
-            
+            Question5();
         }
     }
 }
