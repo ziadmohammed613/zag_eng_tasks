@@ -176,6 +176,16 @@ namespace LinqTask
             System.Console.WriteLine("BONUS: Project each employee to include a \"SeniorityLevel\" property");
             PrintList(employees.Select(e => new { e.Name , e.Department , e.Salary , Seniority = e.Salary >= 9000 ? "Senior" : e.Salary >= 7000 ? "Mid" : "Junior"}));
         }
+        public static void Question7()
+        {
+            List<int> scores = [88, 92, 75, 60, 55, 80, 91, 45];
+            System.Console.WriteLine("1. TakeWhile score >= 70 → expected: [88, 92, 75]");
+            PrintList(scores.TakeWhile(score => score >= 70));
+            System.Console.WriteLine("2. SkipWhile score >= 70 → expected: [60, 55, 80, 91, 45]");
+            PrintList(scores.SkipWhile(score => score >= 70));
+            // TakeWhile : traverse in the list until the condition is false , then it breaks
+            // SkipWhile : as soon as the condition is true , it traverses till the end of the list no matter what
+        }
         public static void Main()
         {
             
