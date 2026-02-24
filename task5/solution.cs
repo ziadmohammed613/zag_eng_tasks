@@ -186,6 +186,39 @@ namespace LinqTask
             // TakeWhile : traverse in the list until the condition is false , then it breaks
             // SkipWhile : as soon as the condition is true , it traverses till the end of the list no matter what
         }
+        public static void Question8()
+        {
+            List<Employee> employees =
+            [
+            new("Ali", "Engineering", 9000m),
+            new("Sara", "Engineering", 8500m),
+            new("Omar", "HR", 6000m),
+            new("Mona", "HR", 6200m),
+            new("Yara", "Marketing", 7000m),
+            new("Karim", "Marketing", 7500m),
+            new("Nada", "Engineering", 9500m),
+            ];
+            System.Console.WriteLine("1. Group by Department, print: \"Engineering → Count: 3, Avg: 9000\"");
+            var groups = employees.GroupBy(e => e.Department);
+            foreach(var group in groups)
+                System.Console.WriteLine($"{group.Key} → Count: {group.Count()}, Avg: {group.Average(e => e.Salary)}");
+
+            System.Console.WriteLine("2. Find the department with the highest total salary budget");
+            var maxSalary = groups.Select(g => new { g.Key , sum = g.Sum(g => g.Salary)})
+                                    .OrderByDescending(g => g.sum)
+                                        .Take(1);
+            PrintList(maxSalary);
+
+            System.Console.WriteLine("3. List employees in each group ordered by Salary descending");
+            foreach(var group in groups)
+            {
+                System.Console.WriteLine($"Department: {group.Key}");
+                foreach(var employee in group.OrderByDescending(e => e.Salary))
+                {
+                    System.Console.WriteLine(employee);
+                }
+            }
+        }
         public static void Main()
         {
             
