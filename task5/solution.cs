@@ -205,9 +205,8 @@ namespace LinqTask
 
             System.Console.WriteLine("2. Find the department with the highest total salary budget");
             var maxSalary = groups.Select(g => new { g.Key , sum = g.Sum(g => g.Salary)})
-                                    .OrderByDescending(g => g.sum)
-                                        .Take(1);
-            PrintList(maxSalary);
+                                    .MaxBy(g => g.sum);
+            System.Console.WriteLine(maxSalary);
 
             System.Console.WriteLine("3. List employees in each group ordered by Salary descending");
             foreach(var group in groups)
