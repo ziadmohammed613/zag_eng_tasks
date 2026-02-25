@@ -234,6 +234,18 @@ namespace LinqTask
             // Q2: query will store the result in a List
             // Q3: ToList() , ToArray() , ToDictionary()
         }
+        public static void Question10()
+        {
+            List<string> words = ["apple", "fig", "banana", "kiwi", "grape", "mango", "pear", "plum"];
+            var query = words.Where(item => item.Length > 4) // 1. Filter words longer than 4 characters
+                                .Where((item , index) => index % 2 == 0); // 2. Filter words at even indexes (0, 2, 4, 6...) using (item, index) overload
+            PrintList(query);
+            System.Console.WriteLine("========");
+            var query2 = words.Where((item , index) => item.Length > 4 && index % 2 == 0); // 3. Filter words that are BOTH longer than 4 chars AND at an even index
+            PrintList(query2);
+            // 4. What is the index of "mango" in the filtered result from step 1?
+            // Ans: index 3
+        }
         public static void Main()
         {
             
