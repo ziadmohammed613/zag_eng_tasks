@@ -218,6 +218,22 @@ namespace LinqTask
                 }
             }
         }
+        public static void Question9()
+        {
+            List<int> nums = [1, 2, 3, 4, 5];
+
+            var query = nums.Where(n => n > 2); // ← query defined here
+            query = nums.Where(n => n > 2).ToList();
+
+            nums.Add(10); // ← source modified AFTER query
+            
+            foreach (var n in query)
+                Console.Write(n + " ");
+
+            // Q1: output: 3 , 4 , 5 , 10 , why:  query is in deferred execution which means it stores the query and call it when enumerated
+            // Q2: query will store the result in a List
+            // Q3: ToList() , ToArray() , ToDictionary()
+        }
         public static void Main()
         {
             
