@@ -268,6 +268,50 @@ namespace LinqTask
                                                 .Distinct();
             PrintList(duplicated);
         }
+        public static void Question12()
+        {
+            List<Employee> employees =
+            [
+            new("Ali", "Engineering", 9000m),
+            new("Sara", "Engineering", 8500m),
+            new("Omar", "HR", 6000m),
+            new("Mona", "HR", 6200m),
+            new("Yara", "Marketing", 7000m),
+            new("Karim", "Marketing", 7500m),
+            new("Nada", "Engineering", 9500m),
+            ];
+            List<Course> courses =
+            [
+            new("C# Basics", ["Ali", "Sara", "Omar"]),
+            new("LINQ Mastery", ["Sara", "Mona", "Ali"]),
+            new("ASP.NET Core", ["Yara", "Omar", "Karim"]),
+            ];
+            System.Console.WriteLine("1. From employees: get the TOP 2 highest-paid employees per department.");
+            var top2Empoyees = employees.GroupBy(e => e.Department)
+                                    .SelectMany(g => g.OrderByDescending(e => e.Salary).Take(2));
+            PrintList(top2Empoyees);
+            System.Console.WriteLine("2. From courses: build a Dictionary<string, int> of");
+            var courseDict = courses.ToDictionary(c => c.Title , c => c.Students.Count).Where(c => c.Value > 2);
+            PrintList(courseDict);
+            System.Console.WriteLine("3.1 Does ANY employee in Engineering earn less than 8000?");
+            bool engineerCheck = employees.Where(e => e.Department == "Engineering").Any(e => e.Salary < 8000);
+            System.Console.WriteLine(engineerCheck);
+            System.Console.WriteLine("3.2 Do ALL HR employees earn more than 5500?");
+            bool HRCheck = employees.Where(e => e.Department == "HR").All(e => e.Salary > 5500);
+            System.Console.WriteLine(HRCheck);
+            System.Console.WriteLine("4. Project the top-2-per-dept result into:\n"
+                                    +"+ { Rank, Name, Department, Salary, SeniorityLevel }\n"
+                                    +"+ where Rank resets per department (use indexed Select per group)");
+            var query = top2Empoyees.Select((e, index) => new
+            {
+                Rank = index + 1 ,
+                e.Name ,
+                e.Department ,
+                e.Salary ,
+                Seniority = e.Salary >= 9000 ? "Senior" : e.Salary >= 7000 ? "Mid" : "Junior"
+            });
+            PrintList(query);
+        }
         public static void Main()
         {
             
