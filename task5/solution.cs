@@ -246,6 +246,28 @@ namespace LinqTask
             // 4. What is the index of "mango" in the filtered result from step 1?
             // Ans: index 3
         }
+        record Course(string Title, List<string> Students);
+        public static void Question11()
+        {
+            List<Course> courses =
+            [
+            new("C# Basics", ["Ali", "Sara", "Omar"]),
+            new("LINQ Mastery", ["Sara", "Mona", "Ali"]),
+            new("ASP.NET Core", ["Yara", "Omar", "Karim"]),
+            ];
+            System.Console.WriteLine("Flatten to a single list of ALL student names (with duplicates)");
+            var students = courses.SelectMany(c => c.Students);
+            PrintList(students);
+            System.Console.WriteLine("Get a distinct list of all student names");
+            var studentsDistinct = courses.SelectMany(c => c.Students).Distinct();
+            PrintList(studentsDistinct);
+            System.Console.WriteLine("Find students who appear in MORE THAN ONE course");
+            var duplicated = students.GroupBy(s => s)
+                                        .Where(s => s.Count() > 1)
+                                            .SelectMany(g => g)
+                                                .Distinct();
+            PrintList(duplicated);
+        }
         public static void Main()
         {
             
