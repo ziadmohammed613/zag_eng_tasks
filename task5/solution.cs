@@ -288,16 +288,16 @@ namespace LinqTask
             ];
             System.Console.WriteLine("1. From employees: get the TOP 2 highest-paid employees per department.");
             var top2Empoyees = employees.GroupBy(e => e.Department)
-                                    .SelectMany(g => g.OrderByDescending(e => e.Salary).Take(2));
+                                    .SelectMany(g => g.OrderByDescending(e => e.Salary).Take(2)); // deffered execution
             PrintList(top2Empoyees);
             System.Console.WriteLine("2. From courses: build a Dictionary<string, int> of");
-            var courseDict = courses.ToDictionary(c => c.Title , c => c.Students.Count).Where(c => c.Value > 2);
+            var courseDict = courses.ToDictionary(c => c.Title , c => c.Students.Count).Where(c => c.Value > 2); // immediate execution
             PrintList(courseDict);
             System.Console.WriteLine("3.1 Does ANY employee in Engineering earn less than 8000?");
-            bool engineerCheck = employees.Where(e => e.Department == "Engineering").Any(e => e.Salary < 8000);
+            bool engineerCheck = employees.Where(e => e.Department == "Engineering").Any(e => e.Salary < 8000); // deffered execution
             System.Console.WriteLine(engineerCheck);
             System.Console.WriteLine("3.2 Do ALL HR employees earn more than 5500?");
-            bool HRCheck = employees.Where(e => e.Department == "HR").All(e => e.Salary > 5500);
+            bool HRCheck = employees.Where(e => e.Department == "HR").All(e => e.Salary > 5500); // deffered execution
             System.Console.WriteLine(HRCheck);
             System.Console.WriteLine("4. Project the top-2-per-dept result into:\n"
                                     +"+ { Rank, Name, Department, Salary, SeniorityLevel }\n"
@@ -309,7 +309,7 @@ namespace LinqTask
                 e.Department ,
                 e.Salary ,
                 Seniority = e.Salary >= 9000 ? "Senior" : e.Salary >= 7000 ? "Mid" : "Junior"
-            });
+            }); // deffered execution
             PrintList(query);
         }
         public static void Main()
