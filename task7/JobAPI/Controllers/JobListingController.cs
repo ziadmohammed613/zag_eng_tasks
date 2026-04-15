@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using JobAPI.Data;
 using JobAPI.Services;
+using JobAPI.Filters;
 namespace JobAPI.Controllers
 {
     [ApiController]
@@ -26,12 +27,14 @@ namespace JobAPI.Controllers
         }
         [HttpPost]
         [Route("")]
+        [ValidateJobFilter]
         public ActionResult CreateJobListing(JobListing jobListing)
         {
             _jobService.Create(jobListing);
             return Ok();
         }
         [HttpPut("{id}")]
+        [ValidateJobFilter]
         public ActionResult UpdateJobListing(int id , JobListing jobListing)
         {
             _jobService.Update(id, jobListing);

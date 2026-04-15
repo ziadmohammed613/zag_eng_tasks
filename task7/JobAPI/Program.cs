@@ -1,6 +1,7 @@
 using JobAPI.Data;
 using Microsoft.EntityFrameworkCore;
 using JobAPI.Services;
+using JobAPI.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +14,8 @@ builder.Services.AddScoped<IJobService, JobService>();
 builder.Services.AddDbContext<AppDbContext>(builder => builder.UseSqlServer("Data Source=DESKTOP-HU0LKOG\\SQLEXPRESS;Integrated Security=True;Persist Security Info=False;Pooling=False;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=True;Application Name=\"SQL Server Management Studio\";Command Timeout=0;DataBase=JobListing"));
 
 var app = builder.Build();
+
+app.UseMiddleware<LogRequestMiddleware>();
 
 app.UseHttpsRedirection();
 

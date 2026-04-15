@@ -22,6 +22,7 @@ namespace JobAPI.Services
         }
         public void Create(JobListing job)
         {
+            job.Id = 0;
             _context.Set<JobListing>().Add(job);
             _context.SaveChanges();
         }
