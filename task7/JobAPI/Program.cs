@@ -16,8 +16,12 @@ var app = builder.Build();
 
 app.UseHttpsRedirection();
 
-app.UseHttpsRedirection();
+app.UseRouting();
+// maps route to application controllers
+
 app.UseAuthorization();
+// check user authorization
+
 app.MapControllers();
 
 app.Run();
